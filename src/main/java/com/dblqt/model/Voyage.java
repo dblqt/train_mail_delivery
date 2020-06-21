@@ -12,6 +12,7 @@ public class Voyage {
 
     private final int endTime;
 
+/*
     public Node getLocation(final int time) {
         if (time == startTime) {
             return path.getStart();
@@ -31,7 +32,9 @@ public class Voyage {
         return null;
         // The train has arived.
     }
+*/
 
+/*
     public Edge getEdge(final int time) {
         if (time == startTime) {
             return path.getPath().get(0);
@@ -49,6 +52,7 @@ public class Voyage {
         return null;
         // The train has arived.
     }
+*/
 
     public Edge getNextEdge(final int time) {
         if (time == startTime) {
