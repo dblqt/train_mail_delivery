@@ -36,11 +36,24 @@ public class Algorithm1 {
     public static void main(String... args) throws Exception {
         log.info("Executing Algorithm 1 ...");
 
-        final Problem problem = loadProblem("./samples/sample-2.txt");
+        final var problems = new String[] {
+                "./samples/sample.txt",
+                "./samples/sample-1.txt",
+                "./samples/sample-2.txt"
+        };
 
+        for (var problemFile: problems) {
+            System.out.printf("Solving problem: %s\n", problemFile);
+            final var problem = loadProblem(problemFile);
+            solveProblem(problem);
+        }
+    }
+
+    private static void solveProblem(Problem problem) {
         checkProblem(problem);
 
-        System.out.println(problem);
+        // System.out.println(problem);
+
         var time = 0;
         var moves = new ArrayList<Move>();
         while(problem.undeliveredPackages()) {
