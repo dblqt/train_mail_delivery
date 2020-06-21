@@ -57,9 +57,13 @@ public class GraphAlgorithms {
         }
 
         var openNodes = new LinkedList<>(Collections.singleton(start));
+        var closedNodes = new HashSet<>();
 
         while (!openNodes.isEmpty()) {
             var node = openNodes.pop();
+            if (!closedNodes.add(node)) {
+                continue;
+            }
 
             var edges = node.getEdges().values().stream()
                     .sorted(Comparator.comparing(Edge::getDistance))
@@ -70,6 +74,7 @@ public class GraphAlgorithms {
                 if (end.getOutbound().size() > 0) {
                     return Optional.of(end);
                 }
+
                 openNodes.add(end);
             }
         }

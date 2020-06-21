@@ -66,7 +66,7 @@ public class ProblemLoader {
         }
 
         private void readTrains(String line) {
-            var p = Pattern.compile("^(\\w+).*,(\\w+),(\\d).*");
+            var p = Pattern.compile("^(\\w+).*,(\\w+),(\\d+).*");
 
             var match = p.matcher(line);
             if (match.matches()) {

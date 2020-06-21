@@ -40,7 +40,7 @@ public class Algorithm1 {
     public static void main(String... args) throws Exception {
         log.info("Executing Algorithm 1 ...");
 
-        final Problem problem = loadProblem("./samples/examples.txt");
+        final Problem problem = loadProblem("./samples/sample-1.txt");
 
         checkProblem(problem);
 
@@ -62,9 +62,10 @@ public class Algorithm1 {
                 // Deliver packages if any.
                 var deliveredPackages = deliverPackage(node, t.getCargo());
 
-                if (t.getVoyage() != null && t.getVoyage().getEndTime() != time) {
+                if (t.getVoyage() != null && t.getVoyage().getEndTime() > time) {
                     // The train is currently on route, we will simply continue the journey until we arrive at the
                     // final destination.
+                    t.setLocation(null);
                     var nextEdge = t.getVoyage().getNextEdge(time);
                     var move = new Move(t, nextEdge.getStart(), t.getVoyage().getPath(), time, nextEdge, time + nextEdge.getDistance());
                     // move.getLoad().addAll(t.getCargo());
@@ -101,7 +102,7 @@ public class Algorithm1 {
                     }
                 } else {
                     // If there are no more undelivered packages we want to show the final move.
-                    if (!problem.undeliveredPackages()) {
+                    if (!problem.undeliveredPackages() && deliveredPackages.size() > 0) {
                         var move = new Move(t, t.getLocation(), null, time, null, time);
                         move.getDrop().addAll(deliveredPackages);
                         moves.add(move);
