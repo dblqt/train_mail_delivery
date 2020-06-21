@@ -1,10 +1,9 @@
 package com.dblqt.algorithms;
 
-import com.dblqt.model.*;
 import com.dblqt.model.Package;
+import com.dblqt.model.*;
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -16,7 +15,7 @@ import static com.dblqt.algorithms.ProblemChecker.checkProblem;
 import static com.dblqt.common.ProblemLoader.loadProblem;
 
 @Slf4j
-public class Algorithm2 {
+public class Algorithm3 {
     public static void main(String... args) throws Exception {
         log.info("Executing Algorithm 1 ...");
 
@@ -48,6 +47,7 @@ public class Algorithm2 {
             log.debug("Time step: {}", time);
             processCompletedMoves(moves, time);
 
+            var blackList = new HashSet<Node>();
             for (var t: problem.getTrains()) {
                 var node = t.getLocation();
 
@@ -109,7 +109,7 @@ public class Algorithm2 {
                         }
                     }
                 } else {
-                    var nextPackage = findClosesPackageBFS(t.getLocation(), t.getCapacity());
+                    var nextPackage = findClosesPackageBFS(t.getLocation(), t.getCapacity(), blackList);
                     // If there are no more undelivered packages we want to show the final move.
                     if (nextPackage.isEmpty() && deliveredPackages.size() > 0) {
                         var move = new Move(t, t.getLocation(), null, time, null, time);
@@ -121,7 +121,9 @@ public class Algorithm2 {
                     // Move train to the next package
                     if (nextPackage.isPresent()) {
                         t.setLocation(null);
-                        final Path shortestPathsDFS = findShortestPathsDFS(node, nextPackage.get());
+                        final Node destination = nextPackage.get();
+                        blackList.add(destination);
+                        final Path shortestPathsDFS = findShortestPathsDFS(node, destination);
                         final Edge nextEdge = shortestPathsDFS.getPath().get(0);
                         final Move move = new Move(t, nextEdge.getStart(), shortestPathsDFS, time, nextEdge,
                                 time + nextEdge.getDistance());

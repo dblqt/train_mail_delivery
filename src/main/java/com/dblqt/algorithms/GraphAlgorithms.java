@@ -52,6 +52,11 @@ public class GraphAlgorithms {
     }
 
     public static Optional<Node> findClosesPackageBFS(final Node start, final int capacity) {
+        return findClosesPackageBFS(start, capacity, new HashSet<>());
+    }
+
+    public static Optional<Node> findClosesPackageBFS(final Node start, final int capacity,
+                                                      final HashSet<Node> blackList) {
         if (start.getOutbound().size() > 0) {
             return Optional.of(start);
         }
@@ -73,7 +78,7 @@ public class GraphAlgorithms {
                 var end = edge.getEnd();
 
                 for (var pkg: end.getOutbound()) {
-                    if (pkg.getWeight() <= capacity) {
+                    if (pkg.getWeight() <= capacity && !blackList.contains(end)) {
                         return Optional.of(end);
                     }
                 }

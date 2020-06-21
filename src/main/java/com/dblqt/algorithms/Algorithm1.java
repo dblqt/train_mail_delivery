@@ -44,6 +44,8 @@ public class Algorithm1 {
                "./samples/sample-3.txt",
 
                 "./samples/sample-4.txt",
+                "./samples/sample-5.txt",
+                "./samples/sample-6.txt",
         };
 
         for (var problemFile: problems) {
