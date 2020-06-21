@@ -2,9 +2,7 @@ package com.dblqt.model;
 
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -17,7 +15,7 @@ public class Train {
     private int capacity;
 
     @Getter(AccessLevel.PRIVATE)
-    private final List<Package> cargo = new ArrayList<>();
+    private final Set<Package> cargo = new HashSet<>();
 
     @Setter
     private Voyage voyage;
@@ -49,5 +47,4 @@ public class Train {
         cargo.add(pkg);
         capacity -= pkg.getWeight();
     }
-
 }

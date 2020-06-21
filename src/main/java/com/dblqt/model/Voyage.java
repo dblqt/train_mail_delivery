@@ -66,5 +66,19 @@ public class Voyage {
         return null;
         // The train has arived.
     }
+
+    public boolean isEnRoute(final Node node, int time) {
+        var localTime = time - startTime;
+        for (var edge: path.getPath()) {
+            if (localTime > 0 ) {
+                localTime -= edge.getDistance();
+            }
+
+            if (edge.getEnd().equals(node)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 

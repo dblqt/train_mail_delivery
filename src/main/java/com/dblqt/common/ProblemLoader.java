@@ -56,7 +56,8 @@ public class ProblemLoader {
             if (match.matches()) {
                 var m = match.group(1);
                 final Node node = new Node(m);
-                problem.getNodeMap().put(m, node);
+                // problem.getNodeMap().put(m, node);
+                problem.addNode(node);
                 return;
             }
 
@@ -78,7 +79,7 @@ public class ProblemLoader {
 
                 train.setLocation(location);
 
-                problem.getTrains().add(train);
+                problem.addTrain(train);
 
                 return;
             }
@@ -101,7 +102,7 @@ public class ProblemLoader {
                 var packge = new Package(n, problem.getNodeMap().get(destination.getName()), weight);
 
                 start.getOutbound().add(packge);
-                problem.getPackages().add(packge);
+                problem.addPackage(packge);
 
                 return;
             }
@@ -121,13 +122,11 @@ public class ProblemLoader {
                 var stop = problem.getNodeMap().get(match.group(3));
                 var length = Integer.parseInt(match.group(4));
 
-                var edge1 = new Edge(n, start, stop, length);
-                problem.getEdges().add(edge1);
-                start.getEdges().put(stop, edge1);
+                var edge = new Edge(n, start, stop, length);
+                problem.addEdge(edge);
+                start.getEdges().put(stop, edge);
 
-                var edge2 = new Edge(n, stop, start, length);
-                problem.getEdges().add(edge2);
-                stop.getEdges().put(start, edge2);
+                stop.getEdges().put(start, problem.getEdgeMap().get(n + "_R"));
 
                 return;
             }
