@@ -39,7 +39,8 @@ public class Algorithm1 {
         final var problems = new String[] {
                 "./samples/sample.txt",
                 "./samples/sample-1.txt",
-                "./samples/sample-2.txt"
+                "./samples/sample-2.txt",
+                "./samples/sample-3.txt",
         };
 
         for (var problemFile: problems) {
@@ -119,7 +120,7 @@ public class Algorithm1 {
                     }
 
                     // Move train to the next package
-                    var nextPackage = findClosesPackageBFS(t.getLocation());
+                    var nextPackage = findClosesPackageBFS(t.getLocation(), t.getCapacity());
                     if (nextPackage.isPresent()) {
                         t.setLocation(null);
                         final Path shortestPathsDFS = findShortestPathsDFS(node, nextPackage.get());

@@ -51,7 +51,7 @@ public class GraphAlgorithms {
         return paths.stream().min(Comparator.comparingInt(Path::getLength)).orElseThrow();
     }
 
-    public static Optional<Node> findClosesPackageBFS(final Node start) {
+    public static Optional<Node> findClosesPackageBFS(final Node start, final int capacity) {
         if (start.getOutbound().size() > 0) {
             return Optional.of(start);
         }
@@ -71,8 +71,11 @@ public class GraphAlgorithms {
 
             for (var edge: edges) {
                 var end = edge.getEnd();
-                if (end.getOutbound().size() > 0) {
-                    return Optional.of(end);
+
+                for (var pkg: end.getOutbound()) {
+                    if (pkg.getWeight() <= capacity) {
+                        return Optional.of(end);
+                    }
                 }
 
                 openNodes.add(end);
