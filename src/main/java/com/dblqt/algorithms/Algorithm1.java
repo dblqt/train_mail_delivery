@@ -111,8 +111,9 @@ public class Algorithm1 {
                         }
                     }
                 } else {
+                    var nextPackage = findClosesPackageBFS(t.getLocation(), t.getCapacity());
                     // If there are no more undelivered packages we want to show the final move.
-                    if (!problem.undeliveredPackages() && deliveredPackages.size() > 0) {
+                    if (nextPackage.isEmpty() && deliveredPackages.size() > 0) {
                         var move = new Move(t, t.getLocation(), null, time, null, time);
                         move.getDrop().addAll(deliveredPackages);
                         moves.add(move);
@@ -120,7 +121,6 @@ public class Algorithm1 {
                     }
 
                     // Move train to the next package
-                    var nextPackage = findClosesPackageBFS(t.getLocation(), t.getCapacity());
                     if (nextPackage.isPresent()) {
                         t.setLocation(null);
                         final Path shortestPathsDFS = findShortestPathsDFS(node, nextPackage.get());
