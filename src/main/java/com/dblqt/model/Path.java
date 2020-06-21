@@ -10,50 +10,12 @@ import java.util.Set;
 
 @Getter
 @ToString
-public class Path implements Cloneable {
+public class Path {
     private final Node start;
 
     private final Set<Node> nodes = new HashSet<>();
 
     private final List<Edge> path = new ArrayList<>();
-
-    public Node getLocation(final int time) {
-        if (time == 0) {
-            return start;
-        }
-
-        var localTime = time;
-        for (var edge: path) {
-            localTime -= edge.getDistance();
-
-            if (localTime < 0 ) {
-                return null;
-            }
-
-            return edge.getEnd();
-        }
-
-        return null;
-        // The train has arived.
-    }
-
-    public Edge getEdge(final int time) {
-        if (time == 0) {
-            return path.get(0);
-        }
-
-        var localTime = time;
-        for (var edge: path) {
-            localTime -= edge.getDistance();
-
-            if (localTime < 0 ) {
-                return edge;
-            }
-        }
-
-        return null;
-        // The train has arived.
-    }
 
     public Node getEnd() {
         if (path.size() == 0 && nodes.size() != 1) {
@@ -76,9 +38,9 @@ public class Path implements Cloneable {
         return path.stream().mapToInt(Edge::getDistance).sum();
     }
 
-    public Object clone() {
+    public Object copy() {
         try {
-            var clone = (Path) super.clone();
+            var clone = new Path(this.start);
 
             clone.nodes.addAll(this.nodes);
             clone.path.addAll(this.path);

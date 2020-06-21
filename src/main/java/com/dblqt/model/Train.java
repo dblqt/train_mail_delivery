@@ -19,5 +19,8 @@ public class Train {
     private final List<Package> cargo = new ArrayList<>();
 
     @Setter
+    private Voyage voyage;
+
+    @Setter
     private Node location;
 }
