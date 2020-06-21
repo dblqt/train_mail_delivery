@@ -9,7 +9,6 @@ import java.util.Objects;
 
 @Getter
 @RequiredArgsConstructor
-@ToString
 public class Package {
     private final String name;
 
@@ -32,5 +31,15 @@ public class Package {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return "Package{" +
+                "name='" + name + '\'' +
+                ", destination=" + destination.getName() +
+                ", weight=" + weight +
+                ", delivered=" + delivered +
+                '}';
     }
 }

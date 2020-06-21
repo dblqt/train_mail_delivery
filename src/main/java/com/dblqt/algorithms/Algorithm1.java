@@ -14,10 +14,6 @@ import static com.dblqt.common.ProblemLoader.loadProblem;
 
 @Slf4j
 public class Algorithm1 {
-    public static Path findNodeWithPackageToDeliver(final Node start) {
-        return null;
-    }
-
     public static void executeMoves(final List<Move> moves, final int time) {
         for (var move: moves) {
             var localTime = move.getStartTime();
@@ -40,7 +36,7 @@ public class Algorithm1 {
     public static void main(String... args) throws Exception {
         log.info("Executing Algorithm 1 ...");
 
-        final Problem problem = loadProblem("./samples/sample-1.txt");
+        final Problem problem = loadProblem("./samples/sample-2.txt");
 
         checkProblem(problem);
 
@@ -60,7 +56,7 @@ public class Algorithm1 {
                 }
 
                 // Deliver packages if any.
-                var deliveredPackages = deliverPackage(node, t.getCargo());
+                var deliveredPackages = t.deliverPackages(node);
 
                 if (t.getVoyage() != null && t.getVoyage().getEndTime() > time) {
                     // The train is currently on route, we will simply continue the journey until we arrive at the
@@ -83,7 +79,7 @@ public class Algorithm1 {
                         if (packge.getWeight() <= t.getCapacity()) {
                             var load = new HashSet<Package>();
                             load.add(packge);
-                            t.getCargo().addAll(load);
+                            t.loadPackage(packge);
                             t.setLocation(null);
                             packages.remove(i);
                             final Path shortestPathsDFS = findShortestPathsDFS(node, packge.getDestination());
@@ -142,20 +138,5 @@ public class Algorithm1 {
                 moves.remove(move);
             }
         }
-    }
-
-    private static Set<Package> deliverPackage(final Node location, Collection<Package> load) {
-        final var delivered = new HashSet<Package>();
-
-        for (var pkg: load) {
-            if (pkg.getDestination().equals(location)) {
-                pkg.setDelivered(true);
-                delivered.add(pkg);
-            }
-        }
-
-        load.removeAll(delivered);
-
-        return delivered;
     }
 }
