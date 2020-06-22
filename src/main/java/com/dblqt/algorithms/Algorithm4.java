@@ -109,7 +109,9 @@ public class Algorithm4 {
                             break;
                         }
                     }
-                } else {
+                }
+
+                if (t.isEmpty()) {
                     var nextPackage = findClosesPackageBFS(t.getLocation(), t.getCapacity(), blackList);
                     // If there are no more undelivered packages we want to show the final move.
                     if (nextPackage.isEmpty() && deliveredPackages.size() > 0) {
