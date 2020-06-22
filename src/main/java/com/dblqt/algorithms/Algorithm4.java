@@ -5,7 +5,9 @@ import com.dblqt.model.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 import static com.dblqt.algorithms.Algorithm1.executeMoves;
 import static com.dblqt.algorithms.Algorithm1.processCompletedMoves;
@@ -49,7 +51,10 @@ public class Algorithm4 {
             processCompletedMoves(moves, time);
 
             var blackList = new HashSet<Node>();
-            for (var t: problem.getTrains()) {
+
+            var trains = problem.getTrains().stream().sorted(Comparator.comparingInt(Train::getCapacity))
+                    .collect(Collectors.toList());
+            for (var t: trains) {
                 var node = t.getLocation();
 
                 if (node == null) {

@@ -20,7 +20,7 @@ public class Algorithm3 {
         log.info("Executing Algorithm 3 ...");
 
         final var problems = new String[] {
-/*
+                "./samples/sample.txt",
                 "./samples/sample.txt",
                 "./samples/sample-1.txt",
                 "./samples/sample-2.txt",
@@ -28,7 +28,6 @@ public class Algorithm3 {
                 "./samples/sample-4.txt",
                 "./samples/sample-5.txt",
                 "./samples/sample-6.txt",
-*/
                 "./samples/sample-7.txt",
         };
 

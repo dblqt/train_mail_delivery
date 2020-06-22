@@ -20,6 +20,6 @@ P3,D,E,3 // package P2 with weight 2 located currently at station C that must be
 
 3 // number of trains
 Q1,B,6 // train T1 with capacity 6 located at station B
-Q2,D,11 // train T1 with capacity 6 located at station B
+Q2,E,11 // train T1 with capacity 6 located at station B
 Q3,B,4 // train T1 with capacity 6 located at station B
 // Q1,B,6 // train T1 with capacity 6 located at station B
