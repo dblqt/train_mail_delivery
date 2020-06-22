@@ -47,4 +47,8 @@ public class Train {
         cargo.add(pkg);
         capacity -= pkg.getWeight();
     }
+
+    public boolean isEmpty() {
+        return cargo.isEmpty();
+    }
 }

@@ -18,7 +18,7 @@ import static com.dblqt.common.ProblemLoader.loadProblem;
 @Slf4j
 public class Algorithm2 {
     public static void main(String... args) throws Exception {
-        log.info("Executing Algorithm 1 ...");
+        log.info("Executing Algorithm 2 ...");
 
         final var problems = new String[] {
                 "./samples/sample.txt",
@@ -28,6 +28,7 @@ public class Algorithm2 {
                 "./samples/sample-4.txt",
                 "./samples/sample-5.txt",
                 "./samples/sample-6.txt",
+                "./samples/sample-7.txt",
         };
 
         for (var problemFile: problems) {

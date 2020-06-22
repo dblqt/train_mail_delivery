@@ -17,9 +17,10 @@ import static com.dblqt.common.ProblemLoader.loadProblem;
 @Slf4j
 public class Algorithm3 {
     public static void main(String... args) throws Exception {
-        log.info("Executing Algorithm 1 ...");
+        log.info("Executing Algorithm 3 ...");
 
         final var problems = new String[] {
+/*
                 "./samples/sample.txt",
                 "./samples/sample-1.txt",
                 "./samples/sample-2.txt",
@@ -27,6 +28,8 @@ public class Algorithm3 {
                 "./samples/sample-4.txt",
                 "./samples/sample-5.txt",
                 "./samples/sample-6.txt",
+*/
+                "./samples/sample-7.txt",
         };
 
         for (var problemFile: problems) {
@@ -108,7 +111,9 @@ public class Algorithm3 {
                             break;
                         }
                     }
-                } else {
+                }
+
+                if (t.isEmpty()) {
                     var nextPackage = findClosesPackageBFS(t.getLocation(), t.getCapacity(), blackList);
                     // If there are no more undelivered packages we want to show the final move.
                     if (nextPackage.isEmpty() && deliveredPackages.size() > 0) {

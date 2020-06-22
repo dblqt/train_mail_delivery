@@ -58,6 +58,7 @@ public class GraphAlgorithms {
     public static Optional<Node> findClosesPackageBFS(final Node start, final int capacity,
                                                       final HashSet<Node> blackList) {
         if (start.getOutbound().size() > 0) {
+            if (start.getOutbound().stream().anyMatch(p -> p.getWeight() <= capacity))
             return Optional.of(start);
         }
 
